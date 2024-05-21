@@ -1,0 +1,102 @@
+<div style="    font-family: system-ui;
+    display: inline-block;
+    BACKGROUND: WHITE;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px #00000070;">
+<h1>Porcentuales : </h1>
+<hr style="margin-bottom: 30px;width: 565px;">
+
+<div style="display: flex">
+  
+<div style="display: flex">
+  <h2>
+  P. V.  $
+  </h2>
+  <input id="PV" onchange="calc(this.value)" type="number" onkeypress="pass(1,event)" style="    height: 28px;
+    width: 157px;
+    margin: 22px 10px;
+    font-size: x-large;    border: 2px solid black;
+    border-radius: 5px;">
+</div>
+<div style="display: flex">
+  <h2>
+  P. N.  $
+  </h2>
+  <input id="PN"  onchange="calc(this.value)" type="number" onkeypress="pass(2,event)" style="    height: 28px;
+    width: 157px;
+    margin: 22px 10px;
+    font-size: x-large;    border: 2px solid black;
+    border-radius: 5px;">
+  <h2>
+  =
+  </h2>
+</div>
+<div id="container" style="outline:auto;margin-left: 10px;width: 180px;text-align: center;margin-top: -7px;">
+<h1 id="TOTAL" style="margin:15px">Total</h1>
+</div>
+</div>
+</body>
+<script/>
+
+var del = false;
+
+function pass(index,e){
+ var key=e.keyCode || e.which;
+  if (key==13){
+    if(index == 1){
+      document.getElementById("PN").focus()
+    } else if(index != 1 && del == false) {
+      del = true;
+    } else if(del){
+      document.getElementById("PN").value = "";
+      document.getElementById("PV").value = "";
+      del = false;
+      document.getElementById("PV").focus()
+      calc(0)
+    }
+  }
+  
+}
+
+function calc(value){
+  var pn = document.getElementById("PN").value
+  var pv = document.getElementById("PV").value
+ 
+  if(pn == "" || pn == 0 && pv == "" || pv == 0){
+	document.getElementById("TOTAL").innerHTML = "Total"
+	document.getElementById("TOTAL").style.color = "black";
+        document.getElementById("container").style.color = "black"
+  } else {
+        total = ( ( pn - pv ) / pv ) * 100
+  
+        total = total.toFixed(2);
+
+        document.getElementById("TOTAL").innerHTML = "%" +  total
+        if(total < 0){
+          document.getElementById("TOTAL").style.color = "red"; 
+          document.getElementById("container").style.color = "red";
+        } 
+        if(total > 0){
+          document.getElementById("TOTAL").style.color = "green"; 
+          document.getElementById("container").style.color = "green";
+        } 
+        if(total == 0){
+          document.getElementById("TOTAL").style.color = "black";
+          document.getElementById("container").style.color = "black";
+        } 
+  }
+
+}
+</script>
+
+<style>
+
+	body{
+		display:flex;
+		BACKGROUND: cadetblue;
+	}
+
+
+</style>
